@@ -97,10 +97,10 @@ python scripts/analyze_log.py
 
 ## Hardware Notes
 
-Confirmed working setups:
-- **Panasonic CF-32 mk1** — Ubuntu 24.04, Intel Bluetooth 4.2, bleak 3.0.2 / BlueZ
-- Any Linux system with BlueZ and a BLE 4.0+ adapter should work
-- Windows may work with bleak's WinRT backend (untested)
+Confirmed working:
+- **Linux** — BlueZ + any BLE 4.0+ adapter. Intel BT 4.2 tested.
+- **Windows** — bleak's WinRT backend works. Use a USB BLE 4.0+ dongle if your built-in adapter doesn't support Central role.
+- **Mac** — bleak supports CoreBluetooth; untested on Rev but should work.
 
 **Finding your scooter's MAC address:**
 ```bash
@@ -140,14 +140,16 @@ Direct GATT characteristic access (mode, telemetry, lights) works fine without a
 
 The GATT map is 64% validated (23/36). Help finish it:
 
-1. Bond your Rev via `bluetoothctl` or nRF Connect
+1. Bond your Rev via nRF Connect (Android/iOS) or your OS Bluetooth settings
 2. Run `scripts/discover_all.py --duration 60` while riding
 3. Open a PR or Issue with your telemetry log
 
 **High-value contributions:**
-- HCI snoop log from the original Boosted app (pre-2020) — would crack the serial channel
-- Testing on different firmware versions (we've only tested v3.1.3)
-- Battery capacity unit identification (`65a8f3c2` reads `6,698,488` — what unit?)
+- HCI snoop log captured while the original Boosted app was connected and riding — would reveal the `SERIAL_CMD` text protocol
+- Testing on different firmware versions (only v3.1.3 confirmed so far)
+- Battery capacity unit identification (`65a8f3c2` reads `6,698,488` — Wh? mAh?)
+
+**Coming soon:** A browser-based PWA that runs directly in Chrome on Android — no Python, no laptop required.
 
 ---
 
