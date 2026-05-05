@@ -95,29 +95,6 @@ python scripts/analyze_log.py
 
 ---
 
-## Repository Structure
-
-```
-boosted-rev-ble/
-├── README.md
-├── GATT_MAP.md                  ← Full characteristic map (23/36 validated)
-├── scripts/
-│   ├── discover_all.py          ← Full GATT read + NOTIFY telemetry logger
-│   ├── analyze_log.py           ← Telemetry log parser with decoders
-│   └── pair_and_test.py         ← Connection test + GATT dump
-├── watchdog/
-│   ├── enforce_mode.py          ← Mode enforcer + watchdog
-│   ├── scan.py                  ← BLE advertisement scanner
-│   └── requirements.txt
-└── docs/
-    ├── bonding.md               ← How to trigger BLE pairing mode
-    ├── methodology.md           ← How this was reverse engineered
-    ├── legal_context.md         ← Utah HB 117 and other state laws
-    └── GATT_protocol_full.md    ← APK-derived protocol map
-```
-
----
-
 ## Hardware Notes
 
 Confirmed working setups:
