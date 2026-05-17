@@ -1,0 +1,43 @@
+# Virtual environments
+.venv/
+__pycache__/
+*.pyc
+
+# APK decompilation (too large + copyright)
+apk_decompiled/
+jadx/
+
+# Internal project notes
+project_context.md
+
+# Raw telemetry logs (contain device MAC)
+notify_log_*.txt
+brake_log_*.txt
+
+# Windows-only debug scripts
+scripts/_*.ps1
+scripts/_*.py
+scripts/.adapter_state.json
+scripts/adapter_swap.ps1
+scripts/preflight.py
+
+# One-off test/capture scripts (session-specific)
+scripts/lights_monitor.py
+scripts/brake_capture.py
+scripts/all_modes_capture.py
+scripts/single_mode_capture.py
+scripts/_hunt_scooter.py
+scripts/_quick_scan.py
+scripts/_diag_adapter.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android build artifacts
+android/RevGuard/.gradle/
+android/RevGuard/.kotlin/
+android/RevGuard/app/build/
+android/RevGuard/build/
+android/RevGuard/local.properties
+*.apk

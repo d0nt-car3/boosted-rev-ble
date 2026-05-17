@@ -149,7 +149,11 @@ The GATT map is 64% validated (23/36). Help finish it:
 - Testing on different firmware versions (only v3.1.3 confirmed so far)
 - Battery capacity unit identification (`65a8f3c2` reads `6,698,488` — Wh? mAh?)
 
-**Coming soon:** A browser-based PWA that runs directly in Chrome on Android — no Python, no laptop required.
+### Rev Guard — Android App (NEW)
+
+A native Android app that runs on any Android 10+ phone. Locks Mode 2 and auto-reverts any mode changes — even with the screen off. No laptop required.
+
+See **[android/RevGuard/README.md](android/RevGuard/README.md)** for install instructions and details.
 
 ---
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rev Guard</string>
+    <string name="btn_connect">Connect</string>
+    <string name="btn_disconnect">Disconnect</string>
+    <string name="btn_open_bt_settings">Open Bluetooth Settings</string>
+    <string name="btn_export_log">Export Log</string>
+    <string name="label_status">Status</string>
+    <string name="label_mode">Mode</string>
+    <string name="label_battery">Battery</string>
+    <string name="label_event_log">Event Log</string>
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_connecting">Connecting…</string>
+    <string name="status_connected">Connected</string>
+    <string name="status_reconnecting">Reconnecting…</string>
+    <string name="mode_locked">🔒 Mode 2 — 18 mph Locked</string>
+    <string name="mode_reverting">⚠️ Reverting…</string>
+    <string name="mode_unknown">—</string>
+    <string name="battery_unknown">—%%</string>
+    <string name="bond_required_title">Scooter Not Bonded</string>
+    <string name="bond_required_message">Your Boosted Rev must be paired with this phone before Rev Guard can connect.</string>
+</resources>
