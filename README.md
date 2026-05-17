@@ -19,7 +19,42 @@ This project reverse engineered the Rev's BLE GATT protocol to:
 
 ---
 
-## Quick Start
+## Rev Guard — Android App
+
+> **The recommended way to enforce speed compliance.** No laptop, no terminal — just your phone.
+
+Rev Guard is a native Android app that connects to your Boosted Rev over BLE and:
+
+- **Locks Mode 2 (18 mph)** on connect
+- **Auto-reverts** any mode change within ~50-200ms via real-time GATT NOTIFY
+- **Runs with the screen off** — foreground service keeps BLE alive in your pocket
+- **Logs all events** with timestamps, exportable as legal compliance evidence
+- **Includes a bonding wizard** — scans for and bonds your scooter directly (no nRF Connect needed)
+
+### Install
+
+```bash
+# Build from source (requires JDK 17 + Android SDK)
+cd android/RevGuard
+./gradlew assembleDebug
+adb install app/build/outputs/apk/debug/app-debug.apk
+```
+
+Or download the pre-built APK from [Releases](../../releases).
+
+**Requirements:** Android 10+ with sideloading enabled. Tested on Pixel 8 / GrapheneOS.
+
+See **[android/RevGuard/README.md](android/RevGuard/README.md)** for full documentation.
+
+### Why Android instead of Python?
+
+This project started with a Python watchdog script (`watchdog/enforce_mode.py`) that worked well from a laptop. But for real-world riding, you need enforcement running in your pocket with the screen off. Android's Web Bluetooth API drops BLE connections when the screen locks, so a native app with a foreground service was the only reliable path.
+
+**The Python tools are still included** for desktop use, telemetry research, and GATT exploration.
+
+---
+
+## Python Tools (Desktop)
 
 ### Requirements
 - Python 3.8+
@@ -98,11 +133,12 @@ python scripts/analyze_log.py
 ## Hardware Notes
 
 Confirmed working:
+- **Android** — Rev Guard app on any Android 10+ phone (Pixel 8 / GrapheneOS tested)
 - **Linux** — BlueZ + any BLE 4.0+ adapter. Intel BT 4.2 tested.
 - **Windows** — bleak's WinRT backend works. Use a USB BLE 4.0+ dongle if your built-in adapter doesn't support Central role.
 - **Mac** — bleak supports CoreBluetooth; untested on Rev but should work.
 
-**Finding your scooter's MAC address:**
+**Finding your scooter's MAC address (Python tools):**
 ```bash
 python watchdog/scan.py
 # Look for "BoostedRev" in the scan results
@@ -140,7 +176,7 @@ Direct GATT characteristic access (mode, telemetry, lights) works fine without a
 
 The GATT map is 64% validated (23/36). Help finish it:
 
-1. Bond your Rev via nRF Connect (Android/iOS) or your OS Bluetooth settings
+1. Bond your Rev via the Rev Guard app, nRF Connect, or your OS Bluetooth settings
 2. Run `scripts/discover_all.py --duration 60` while riding
 3. Open a PR or Issue with your telemetry log
 
@@ -148,12 +184,6 @@ The GATT map is 64% validated (23/36). Help finish it:
 - HCI snoop log captured while the original Boosted app was connected and riding — would reveal the `SERIAL_CMD` text protocol
 - Testing on different firmware versions (only v3.1.3 confirmed so far)
 - Battery capacity unit identification (`65a8f3c2` reads `6,698,488` — Wh? mAh?)
-
-### Rev Guard — Android App (NEW)
-
-A native Android app that runs on any Android 10+ phone. Locks Mode 2 and auto-reverts any mode changes — even with the screen off. No laptop required.
-
-See **[android/RevGuard/README.md](android/RevGuard/README.md)** for install instructions and details.
 
 ---
 
