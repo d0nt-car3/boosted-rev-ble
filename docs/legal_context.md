@@ -6,21 +6,31 @@
 
 ## Why This Project Exists
 
-Utah passed **HB 117** (effective 2026), which limits electric scooters operating as "electric assisted bicycles" or "personal mobility devices" in pedestrian zones to **20 mph**. 
+Utah Code § 41-6a-1115 defines a "motor-assisted scooter" as a device with an electric motor ≤ 2,000W capable of no more than **20 mph** on a paved level surface. Devices exceeding this threshold may be classified as electric motorcycles, requiring a driver's license and insurance.
 
-The Boosted Rev's stock Mode 3 top speed is **24 mph**, placing it out of compliance. With Boosted having shut down in 2020, no official firmware update or speed-limiting option exists.
+The Boosted Rev's stock Mode 3 top speed is **24 mph**, placing it outside the motor-assisted scooter classification. With Boosted having shut down in 2020, no official firmware update or speed-limiting option exists.
 
-This project provides a software method to cap the Rev at **18 mph (Mode 2)**, providing a legal 2 mph buffer below the 20 mph limit.
+This project provides a software method to cap the Rev at **18 mph (Mode 2)**, keeping it within the 20 mph classification threshold with a 2 mph margin.
 
 ---
 
-## Utah HB 117 (2026)
+## Utah Motor-Assisted Scooter Law (UCA § 41-6a-1115)
 
-- **Speed limit:** 20 mph maximum for electric scooters in applicable zones
-- **Applicability:** Scooters operating on pedestrian paths, bike lanes, and shared-use paths
-- **Enforcement:** Local law enforcement
+This statute was established through the 2019 legislative session (Chapter 428) and updated by H.B. 381 (2026 session) with revised definitions for electric mobility devices.
 
-**This project achieves compliance:** Mode 2 = 18 mph ≤ 20 mph ✅
+### Classification Requirements (what makes it a "motor-assisted scooter")
+- **Motor power:** ≤ 2,000 watts
+- **Capable speed:** ≤ 20 mph on a paved level surface
+- **Design:** 2+ wheels, handlebars, deck for standing/sitting
+- **Treatment:** Subject to the same rules as bicycles
+
+### Operating Speed Limit
+- **15 mph maximum** on public ways (UCA § 41-6a-1115)
+- This is a behavioral speed limit, like a posted road speed — the device *can* go faster, but you must not
+- Local jurisdictions may further restrict speed or prohibit use on specific paths
+
+**This project achieves classification compliance:** Mode 2 = 18 mph capable ≤ 20 mph ✅
+**Operating speed is the rider's responsibility:** Stay ≤ 15 mph on public ways
 
 ---
 

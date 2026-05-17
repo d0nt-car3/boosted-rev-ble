@@ -17,7 +17,7 @@
 
 ### Background
 
-Utah HB 117 limits pedestrian scooters to 20mph effective 2026. My Boosted Rev tops out at 24mph in Mode 3. Boosted went out of business in 2020, so there's no OTA update coming.
+Utah Code § 41-6a-1115 classifies motor-assisted scooters as devices capable of no more than 20mph. My Boosted Rev tops out at 24mph in Mode 3. Boosted went out of business in 2020, so there's no OTA update coming.
 
 The only path was to do it myself.
 

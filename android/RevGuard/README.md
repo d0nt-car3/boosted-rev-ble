@@ -8,7 +8,7 @@
 
 Rev Guard connects to your Boosted Rev scooter over Bluetooth Low Energy and:
 
-1. **Sets Mode 2 (18 mph)** — Utah HB 117 compliant
+1. **Sets Mode 2 (18 mph)** — compliant with Utah Code § 41-6a-1115 (≤ 20 mph classification)
 2. **Monitors for mode changes** via real-time BLE NOTIFY (push, not polling)
 3. **Auto-reverts** any mode change back to Mode 2 within ~50-200ms
 4. **Logs all events** with timestamps — exportable as evidence

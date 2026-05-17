@@ -22,7 +22,7 @@ boosted-rev-ble/
 └── docs/
     ├── methodology.md         ← Documentation of the reverse engineering process (nRF Connect + JADX)
     ├── bonding.md             ← Instructions for triggering pairing mode via the handlebar button
-    ├── legal_context.md       ← Utah HB 117 context and general speed compliance notes
+    ├── legal_context.md       ← Utah UCA § 41-6a-1115 context and general speed compliance notes
     └── GATT_protocol_full.md  ← APK-derived protocol map
 ```
 
