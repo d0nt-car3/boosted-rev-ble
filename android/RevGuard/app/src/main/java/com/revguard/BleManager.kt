@@ -128,7 +128,7 @@ class BleManager(
                 return
             }
 
-            eventLog.log("BLE", "Services discovered — mode and battery characteristics ready")
+            eventLog.log("BLE", "Services discovered: mode and battery characteristics ready")
             updateState(State.CONNECTED)
 
             // Queue operations in order: enable notify → read mode → read battery

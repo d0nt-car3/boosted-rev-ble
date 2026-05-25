@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.RevGuard" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="android:colorBackground">@color/background</item>
-        <item name="colorSurface">@color/surface</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorOnBackground">@color/on_background</item>
-        <item name="colorOnSurface">@color/on_surface</item>
-        <item name="android:statusBarColor">@color/background</item>
-        <item name="android:navigationBarColor">@color/background</item>
+    <!--
+        Minimal splash theme to prevent a white flash before Compose renders.
+        All actual theming is handled in Compose (ui/theme/Theme.kt).
+    -->
+    <style name="Theme.RevGuard" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#FF0D1117</item>
+        <item name="android:statusBarColor">#FF0D1117</item>
+        <item name="android:navigationBarColor">#FF0D1117</item>
     </style>
 </resources>

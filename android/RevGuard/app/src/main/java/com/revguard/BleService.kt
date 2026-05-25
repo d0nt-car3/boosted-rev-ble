@@ -64,9 +64,9 @@ class BleService : Service() {
                 eventLog.log("MODE_REVERT",
                     "$fromLabel → ${Constants.TARGET_MODE_LABEL} (forced)")
                 bleManager.writeTargetMode()
-                updateNotification("⚠️ Mode change blocked — reverted to ${Constants.TARGET_MODE_LABEL}")
+                updateNotification("Mode change blocked, reverted to ${Constants.TARGET_MODE_LABEL}")
             } else {
-                updateNotification("🔒 ${Constants.TARGET_MODE_LABEL} — Locked")
+                updateNotification("${Constants.TARGET_MODE_LABEL} - Locked")
             }
         }
 
@@ -74,20 +74,20 @@ class BleService : Service() {
         bleManager.addStateListener { state ->
             when (state) {
                 BleManager.State.CONNECTED -> {
-                    updateNotification("🔒 Connected — enforcing ${Constants.TARGET_MODE_LABEL}")
+                    updateNotification("Connected, enforcing ${Constants.TARGET_MODE_LABEL}")
                     // Set initial mode
                     bleManager.writeTargetMode()
                     startBatteryPolling()
                 }
                 BleManager.State.DISCONNECTED -> {
-                    updateNotification("❌ Disconnected")
+                    updateNotification("Disconnected")
                     batteryJob?.cancel()
                 }
                 BleManager.State.CONNECTING -> {
                     updateNotification("Connecting...")
                 }
                 BleManager.State.RECONNECTING -> {
-                    updateNotification("🔄 Reconnecting...")
+                    updateNotification("Reconnecting...")
                     batteryJob?.cancel()
                 }
             }

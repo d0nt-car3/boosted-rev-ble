@@ -22,7 +22,7 @@ object Constants {
     const val MODE_3_BYTE: Byte = 0x02  // 24 mph
 
     const val TARGET_MODE_BYTE: Byte = MODE_2_BYTE
-    const val TARGET_MODE_LABEL: String = "Mode 2 — 18 mph"
+    const val TARGET_MODE_LABEL: String = "Mode 2, 18 mph"
 
     // ── Device identification ────────────────────────────────────────────
     const val DEVICE_NAME_PREFIX: String = "BOOSTED"
@@ -40,9 +40,9 @@ object Constants {
      * Convert raw mode byte (0/1/2) to human-readable label.
      */
     fun modeLabel(modeByte: Byte): String = when (modeByte) {
-        MODE_1_BYTE -> "Mode 1 — 12 mph"
-        MODE_2_BYTE -> "Mode 2 — 18 mph"
-        MODE_3_BYTE -> "Mode 3 — 24 mph"
+        MODE_1_BYTE -> "Mode 1, 12 mph"
+        MODE_2_BYTE -> "Mode 2, 18 mph"
+        MODE_3_BYTE -> "Mode 3, 24 mph"
         else -> "Unknown (0x${String.format("%02X", modeByte)})"
     }
 }
