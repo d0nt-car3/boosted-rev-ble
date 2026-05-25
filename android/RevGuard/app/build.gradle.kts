@@ -14,15 +14,20 @@ android {
         targetSdk = 35
         versionCode = 2
         versionName = "2.0.0"
+        setProperty("archivesBaseName", "RevGuard-$versionName")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Debug keystore for sideloading distribution.
+            // Replace with a dedicated release keystore if publishing to Play Store.
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
