@@ -1,4 +1,4 @@
-# Legal Context — Speed Regulations for Electric Scooters
+# Legal Context: Speed Regulations for Electric Scooters
 
 > **Disclaimer:** This is informational only and not legal advice. Verify current regulations in your jurisdiction before riding.
 
@@ -26,10 +26,10 @@ This statute was established through the 2019 legislative session (Chapter 428) 
 
 ### Operating Speed Limit
 - **15 mph maximum** on public ways (UCA § 41-6a-1115)
-- This is a behavioral speed limit, like a posted road speed — the device *can* go faster, but you must not
+- This is a behavioral speed limit, like a posted road speed. The device *can* go faster, but you must not
 - Local jurisdictions may further restrict speed or prohibit use on specific paths
 
-**This project achieves classification compliance:** Mode 2 = 18 mph capable ≤ 20 mph ✅
+**This project achieves classification compliance:** Mode 2 = 18 mph capable, under the 20 mph threshold.
 **Operating speed is the rider's responsibility:** Stay ≤ 15 mph on public ways
 
 ---
@@ -51,7 +51,7 @@ This statute was established through the 2019 legislative session (Chapter 428) 
 |---|---|---|
 | ≥ 20 mph | Mode 2 (18 mph) | `0x01` |
 | ≥ 15 mph, < 18 mph | Mode 1 (12 mph) | `0x00` |
-| Any | Mode 1 (12 mph) — conservative | `0x00` |
+| Any | Mode 1 (12 mph), conservative | `0x00` |
 
 ---
 
@@ -61,9 +61,9 @@ Many countries limit electric scooters to 15–25 km/h (~9–15 mph) in public s
 
 | Country | Limit | Mode 1 compliant? | Mode 2 compliant? |
 |---|---|---|---|
-| UK | 15.5 mph (25 km/h) | ✅ | ✅ |
-| EU (general) | 15.5 mph (25 km/h) | ✅ | ✅ |
-| Australia | ~15 mph varies by state | ✅ | Varies |
+| UK | 15.5 mph (25 km/h) | Yes | Yes |
+| EU (general) | 15.5 mph (25 km/h) | Yes | Yes |
+| Australia | ~15 mph varies by state | Yes | Varies |
 | Canada | Varies by province | Check locally | Check locally |
 
 ---
@@ -79,15 +79,15 @@ The physical button performs multiple functions (power, mode, BLE pairing) and c
 
 ---
 
-## Reverse Engineering — Legal Basis
+## Reverse Engineering: Legal Basis
 
 > **Disclaimer:** This is informational context, not legal advice. Consult a lawyer if you have specific concerns.
 
 This project reverse engineered the Boosted Rev's BLE GATT protocol by reading standard Bluetooth Low Energy characteristics from a device the author owns. The following legal frameworks support this activity:
 
-### DMCA §1201(f) — Interoperability
+### DMCA §1201(f): Interoperability
 
-The Digital Millennium Copyright Act permits reverse engineering of computer programs for the purpose of achieving interoperability with independently created programs. This project creates interoperable software (Rev Guard, Python watchdog scripts) that communicates with the Boosted Rev's ESC firmware via its standard BLE interface. No access control or DRM was circumvented — BLE bonding is a standard Bluetooth security mechanism, not a technological protection measure.
+The Digital Millennium Copyright Act permits reverse engineering of computer programs for the purpose of achieving interoperability with independently created programs. This project creates interoperable software (Rev Guard, Python watchdog scripts) that communicates with the Boosted Rev's ESC firmware via its standard BLE interface. No access control or DRM was circumvented; BLE bonding is a standard Bluetooth security mechanism, not a technological protection measure.
 
 ### Right to Repair
 

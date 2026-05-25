@@ -1,14 +1,14 @@
-# Methodology — How the Boosted Rev BLE Protocol Was Reverse Engineered
+# Methodology: How the Boosted Rev BLE Protocol Was Reverse Engineered
 
 ## Tools Required
 
-- **nRF Connect for Mobile** (Android) — free, Nordic Semiconductor
+- **nRF Connect for Mobile** (Android), free, Nordic Semiconductor
 - **Python 3.8+** with `bleak` library
 - A USB BLE adapter supporting Central role (built-in laptop adapters often don't support this)
 
 ---
 
-## Step 1 — Initial Discovery
+## Step 1: Initial Discovery
 
 The Boosted Rev advertises a single primary service UUID:
 
@@ -20,7 +20,7 @@ This UUID is visible in nRF Connect's Scanner tab without bonding. However, **co
 
 ---
 
-## Step 2 — Triggering Pairing Mode
+## Step 2: Triggering Pairing Mode
 
 The Rev does not automatically enter BLE pairing mode. It requires a specific physical gesture:
 
@@ -33,7 +33,7 @@ The scooter enters a short pairing window (approximately 30 seconds). During thi
 
 ---
 
-## Step 3 — Full Service Discovery
+## Step 3: Full Service Discovery
 
 After bonding, four custom services become visible. In nRF Connect, tap **CLIENT** to see the full GATT table including all services and characteristics.
 
@@ -41,7 +41,7 @@ Screenshot and document every characteristic UUID and its properties (READ/WRITE
 
 ---
 
-## Step 4 — Mode Correlation Test
+## Step 4: Mode Correlation Test
 
 To find which characteristic controls ride mode:
 
@@ -58,7 +58,7 @@ To find which characteristic controls ride mode:
 
 ---
 
-## Step 5 — Write Confirmation
+## Step 5: Write Confirmation
 
 In nRF Connect, tap the ↑ (write) icon on `7dc55f22`, enter `01` (BYTE ARRAY / HEX), and tap WRITE.
 
@@ -68,7 +68,7 @@ The scooter display immediately updates to Mode 2. Re-reading the characteristic
 
 ---
 
-## Step 6 — Automated Exploration (USB BLE Adapter)
+## Step 6: Automated Exploration (USB BLE Adapter)
 
 With a BLE Central-capable USB adapter and Python/bleak:
 
@@ -82,6 +82,6 @@ This script reads every characteristic and subscribes to all NOTIFY characterist
 
 ## Key Architectural Observations
 
-- **Speed caps are firmware-coded:** The per-mode speed limits (12/18/24 mph) are not stored in BLE-accessible memory. They are hard-coded in the ESC firmware binary. Changing them requires JTAG firmware extraction and binary patching — not worth pursuing for minor adjustments.
+- **Speed caps are firmware-coded:** The per-mode speed limits (12/18/24 mph) are not stored in BLE-accessible memory. They are hard-coded in the ESC firmware binary. Changing them requires JTAG firmware extraction and binary patching, which is not worth pursuing for minor adjustments.
 - **The `5885` service is cryptographically protected:** The cross-product Boosted service uses a rolling challenge-response mechanism. The original Boosted app holds the key. This channel remains uncracked.
 - **The `ea32` service is global config:** Values in this service do not change across ride modes, confirming it is not per-mode speed configuration.

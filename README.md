@@ -1,4 +1,4 @@
-# Boosted Rev BLE Protocol — Reverse Engineering Project
+# Boosted Rev BLE Protocol: Reverse Engineering Project
 
 > **First public documentation of the Boosted Rev's Bluetooth Low Energy GATT interface.**  
 > 23 of 36 characteristics validated with live telemetry data.
@@ -15,21 +15,21 @@ This project reverse engineered the Rev's BLE GATT protocol to:
 3. Document the full GATT map for community use
 4. Characterize the locked crypto channel for future work
 
-**Result:** Mode 2 (18 mph) can be set via a single BLE write. The write persists across power cycles — the ESC saves it to flash.
+**Result:** Mode 2 (18 mph) can be set via a single BLE write. The write persists across power cycles; the ESC saves it to flash.
 
 ---
 
-## Rev Guard — Android App
+## Rev Guard (Android App)
 
-> **The recommended way to enforce speed compliance.** No laptop, no terminal — just your phone.
+> **The recommended way to enforce speed compliance.** No laptop, no terminal, just your phone.
 
 Rev Guard is a native Android app that connects to your Boosted Rev over BLE and:
 
 - **Locks Mode 2 (18 mph)** on connect
 - **Auto-reverts** any mode change within ~50-200ms via real-time GATT NOTIFY
-- **Runs with the screen off** — foreground service keeps BLE alive in your pocket
+- **Runs with the screen off** via a foreground service that keeps BLE alive in your pocket
 - **Logs all events** with timestamps, exportable as legal compliance evidence
-- **Includes a bonding wizard** — scans for and bonds your scooter directly (no nRF Connect needed)
+- **Includes a bonding wizard** that scans for and bonds your scooter directly (no nRF Connect needed)
 
 ### Install
 
@@ -66,7 +66,7 @@ pip install bleak
 export BOOSTED_MAC="XX:XX:XX:XX:XX:XX"  # your scooter's BLE address
 ```
 
-### Set Mode 2 (18 mph) — Utah Legal
+### Set Mode 2 (18 mph, Utah Legal)
 ```bash
 python watchdog/enforce_mode.py --mode 2
 ```
@@ -101,24 +101,24 @@ python scripts/analyze_log.py
 
 | Value | Mode | Speed | Utah Legal (≤20 mph) |
 |-------|------|-------|----------------------|
-| `0x00` | Mode 1 | 12 mph | ✅ |
-| `0x01` | Mode 2 | 18 mph | ✅ **Recommended** |
-| `0x02` | Mode 3 | 24 mph | ❌ |
+| `0x00` | Mode 1 | 12 mph | Yes |
+| `0x01` | Mode 2 | 18 mph | Yes (**recommended**) |
+| `0x02` | Mode 3 | 24 mph | No (exceeds limit) |
 
-- Write **persists across power cycles** — ESC saves to flash
-- **Mode change is buffered** — ESC applies it only when the motor is fully stopped
-- No challenge-response required — just bond and write
+- Write **persists across power cycles**: the ESC saves it to flash
+- **Mode change is buffered**: the ESC applies it only when the motor is fully stopped
+- No challenge-response required; just bond and write
 
 ### Validated Telemetry
 
-| Characteristic | UUID | Format | Validated |
+| Characteristic | UUID | Format | Notes |
 |---|---|---|---|
-| **Speed** | `7dc56b34` | 2 bytes LE × `0.00223694` = mph | ✅ Matches display |
-| **Odometer** | `7dc56594` | 4 bytes LE × `3.6128e-5` = miles | ✅ Monotonically increasing |
-| **Battery %** | `65a8eeae` | 1 byte = direct percentage | ✅ 71% = 4/5 segments |
-| **Motor Power** | `7dc56bfc` | 2 bytes LE uint16, raw motor effort | ✅ All 3 modes characterized |
-| **Lights Status** | `ea32dcac` | 1 byte: `0x00`=off, `0x01`=on | ✅ NOTIFY on toggle |
-| **Units** | `7dc5c19d` | `0x00`=mph, `0x01`=km/h | ✅ Display switches live |
+| **Speed** | `7dc56b34` | 2 bytes LE × `0.00223694` = mph | Matches display |
+| **Odometer** | `7dc56594` | 4 bytes LE × `3.6128e-5` = miles | Monotonically increasing |
+| **Battery %** | `65a8eeae` | 1 byte = direct percentage | 71% = 4/5 segments |
+| **Motor Power** | `7dc56bfc` | 2 bytes LE uint16, raw motor effort | All 3 modes characterized |
+| **Lights Status** | `ea32dcac` | 1 byte: `0x00`=off, `0x01`=on | NOTIFY fires on toggle |
+| **Units** | `7dc5c19d` | `0x00`=mph, `0x01`=km/h | Display switches live |
 
 ### Motor Power Across All Modes (no-load, on blocks)
 
@@ -133,10 +133,10 @@ python scripts/analyze_log.py
 ## Hardware Notes
 
 Confirmed working:
-- **Android** — Rev Guard app on any Android 10+ phone (Pixel 8 / GrapheneOS tested)
-- **Linux** — BlueZ + any BLE 4.0+ adapter. Intel BT 4.2 tested.
-- **Windows** — bleak's WinRT backend works. Use a USB BLE 4.0+ dongle if your built-in adapter doesn't support Central role.
-- **Mac** — bleak supports CoreBluetooth; untested on Rev but should work.
+- **Android:** Rev Guard app on any Android 10+ phone (Pixel 8 / GrapheneOS tested)
+- **Linux:** BlueZ + any BLE 4.0+ adapter. Intel BT 4.2 tested.
+- **Windows:** bleak's WinRT backend works. Use a USB BLE 4.0+ dongle if your built-in adapter doesn't support Central role.
+- **Mac:** bleak supports CoreBluetooth; untested on Rev but should work.
 
 **Finding your scooter's MAC address (Python tools):**
 ```bash
@@ -152,10 +152,10 @@ The serial command channel (`58856524`) uses a challenge-response handshake:
 
 1. ESC sends 16-byte random nonce (rolls on every read)
 2. App was supposed to POST this to Boosted's cloud API
-3. Server returns signed response → written back to ESC
+3. Server returns signed response, which is written back to ESC
 4. ESC verifies and grants access
 
-**Status:** Boosted's servers are dead since 2020. No local signing key exists in the APK. We tested writing `RT` commands — writes are accepted but produce no response. The ESC requires authentication before processing serial commands.
+**Status:** Boosted's servers have been dead since 2020. No local signing key exists in the APK. We tested writing `RT` commands; writes are accepted but produce no response. The ESC requires authentication before processing serial commands.
 
 Direct GATT characteristic access (mode, telemetry, lights) works fine without auth.
 
@@ -181,9 +181,9 @@ The GATT map is 64% validated (23/36). Help finish it:
 3. Open a PR or Issue with your telemetry log
 
 **High-value contributions:**
-- HCI snoop log captured while the original Boosted app was connected and riding — would reveal the `SERIAL_CMD` text protocol
+- HCI snoop log captured while the original Boosted app was connected and riding (would reveal the `SERIAL_CMD` text protocol)
 - Testing on different firmware versions (only v3.1.3 confirmed so far)
-- Battery capacity unit identification (`65a8f3c2` reads `6,698,488` — Wh? mAh?)
+- Battery capacity unit identification (`65a8f3c2` reads `6,698,488`, unknown unit)
 
 ---
 
@@ -193,4 +193,4 @@ MIT
 
 ---
 
-*Tested on Boosted Rev firmware v3.1.3 — Utah, May 2026*
+*Tested on Boosted Rev firmware v3.1.3, Utah, May 2026*

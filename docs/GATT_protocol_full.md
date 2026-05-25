@@ -1,4 +1,4 @@
-# Boosted Rev — Full BLE GATT Protocol Map
+# Boosted Rev: Full BLE GATT Protocol Map
 > Source: `com.boostedboards.android` v1.4.5, decompiled via jadx  
 > APK SHA256: `2c0deabe7ce1a5ea66500112d63513a71e52d0b361619e9bc528cecb0daaefdd`  
 > VirusTotal: **0 / 63** (clean)
@@ -14,7 +14,7 @@
 
 ---
 
-## GATT Characteristics — Full Map
+## GATT Characteristics: Full Map
 
 | # | Name | UUID | Notify | Notes |
 |---|---|---|---|---|
@@ -27,7 +27,7 @@
 | 6 | `VEHICLE_ODOMETER` | `7DC56594-C61F-11E5-9912-BA0BE0483C18` | **Yes** | 20-byte offset; coeff = `VehicleType.getOdoToMilesCoeff()` (REV: `3.6128e-5`) |
 | 7 | `VEHICLE_SPEED` | `7DC56B34-C61F-11E5-9912-BA0BE0483C18` | **Yes** | Byte offset 34, 2 bytes. Speed (mph) = raw × `0.00223694` (REV) or `0.00284091` (board) |
 | 8 | `VEHICLE_POWER` | `7DC56BFC-C61F-11E5-9912-BA0BE0483C18` | No | No parser registered |
-| 9 | `VEHICLE_NAME` | `7DC5BB39-C61F-11E5-9912-BA0BE0483C18` | No | Same UUID as VEHICLE_ID — aliased |
+| 9 | `VEHICLE_NAME` | `7DC5BB39-C61F-11E5-9912-BA0BE0483C18` | No | Same UUID as VEHICLE_ID (aliased) |
 | 10 | `VEHICLE_UNITS` | `7DC5C19D-C61F-11E5-9912-BA0BE0483C18` | No | mph vs km/h setting |
 | 11 | `VEHICLE_MD_SERIAL` | `7DC5C201-C61F-11E5-9912-BA0BE0483C18` | No | Motor driver serial number |
 | 12 | `VEHICLE_MD_FW_VERSION` | `7DC5C202-C61F-11E5-9912-BA0BE0483C18` | No | Motor driver firmware version |
@@ -45,7 +45,7 @@
 
 ---
 
-## SERIAL_AUTH Handshake — Architecture Analysis
+## SERIAL_AUTH Handshake: Architecture Analysis
 
 > Source: `com/boostedboards/android/ble/h0/o.java`, lines 207–280
 
@@ -81,7 +81,7 @@ if (this.f1998j) {  // authorize == true
     just = Observable.just(true);  // skips auth entirely
 }
 ```
-The `authorize` boolean is passed in at connection time. Bonded/trusted connections skip the auth entirely. Our nRF Connect sessions write directly to `VEHICLE_MODE` (char 5) without triggering the handshake — consistent with our successful mode writes.
+The `authorize` boolean is passed in at connection time. Bonded/trusted connections skip the auth entirely. Our nRF Connect sessions write directly to `VEHICLE_MODE` (char 5) without triggering the handshake, consistent with our successful mode writes.
 
 ---
 
@@ -106,6 +106,6 @@ Write is persistent across power cycles (stored to ESC flash).
 ---
 
 ## Services Not Yet Mapped
-- `65A8xxxx` series (Battery) — parsers present, byte offsets not fully decoded
-- `EA32xxxx` series (Lights) — parsers present, encoding TBD
-- SERIAL_CMD protocol (text commands over BLE serial) — `RT` prefix seen for telemetry request
+- `65A8xxxx` series (Battery): parsers present, byte offsets not fully decoded
+- `EA32xxxx` series (Lights): parsers present, encoding TBD
+- SERIAL_CMD protocol (text commands over BLE serial): `RT` prefix seen for telemetry request

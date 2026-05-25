@@ -1,6 +1,6 @@
-# Rev Guard — BLE Speed Compliance App
+# Rev Guard: BLE Speed Compliance App
 
-> **Android app that locks your Boosted Rev to Mode 2 (18 mph) and auto-reverts any mode changes — even with the screen off.**
+> **Android app that locks your Boosted Rev to Mode 2 (18 mph) and auto-reverts any mode changes, even with the screen off.**
 
 ---
 
@@ -8,15 +8,15 @@
 
 Rev Guard connects to your Boosted Rev scooter over Bluetooth Low Energy and:
 
-1. **Sets Mode 2 (18 mph)** — compliant with Utah Code § 41-6a-1115 (≤ 20 mph classification)
+1. **Sets Mode 2 (18 mph)**, compliant with Utah Code § 41-6a-1115 (≤ 20 mph classification)
 2. **Monitors for mode changes** via real-time BLE NOTIFY (push, not polling)
 3. **Auto-reverts** any mode change back to Mode 2 within ~50-200ms
-4. **Logs all events** with timestamps — exportable as evidence
-5. **Runs with the screen off** — foreground service keeps BLE alive in your pocket
+4. **Logs all events** with timestamps, exportable as evidence
+5. **Runs with the screen off** via a foreground service that keeps BLE alive in your pocket
 
 ## Requirements
 
-- **Android 10+** (API 29) — any phone with BLE and sideloading enabled
+- **Android 10+** (API 29), any phone with BLE and sideloading enabled
 - **Tested on:** Pixel 8 / GrapheneOS
 - Boosted Rev scooter (firmware v3.1.3 confirmed)
 
@@ -37,14 +37,14 @@ Check [Releases](../../releases) for the latest APK.
 
 ## First Run
 
-1. **Launch Rev Guard** — grant Bluetooth and notification permissions when prompted
+1. **Launch Rev Guard** and grant Bluetooth and notification permissions when prompted
 2. **Bond your scooter** (one-time):
    - Turn on the Boosted Rev
    - Press the handlebar button **5 times** rapidly
    - Tap **"Scan for Scooter"** in the app
    - Tap your scooter when it appears to bond
-3. **Tap Connect** — the app sets Mode 2 and starts the watchdog
-4. **Lock your screen and pocket the phone** — the foreground service keeps everything running
+3. **Tap Connect**. The app sets Mode 2 and starts the watchdog.
+4. **Lock your screen and pocket the phone**. The foreground service keeps everything running.
 
 ## How It Works
 
@@ -58,10 +58,10 @@ Check [Releases](../../releases) for the latest APK.
 
 | Element | Meaning |
 |---|---|
-| 🔒 Mode 2 — 18 mph Locked | Watchdog active, mode is correct |
-| ⚠️ Reverting… | Mode change detected, writing Mode 2 back |
-| ❌ Disconnected | No BLE connection |
-| 🔄 Reconnecting… | Lost connection, attempting to re-establish |
+| **LOCKED**, Mode 2, 18 mph | Watchdog active, mode is correct |
+| **REVERTING** | Mode change detected, writing Mode 2 back |
+| **DISCONNECTED** | No BLE connection |
+| **RECONNECTING** | Lost connection, attempting to re-establish |
 | Battery % | Current scooter battery level (updates every 30s) |
 | Event Log | Timestamped log of all connects, disconnects, and reverts |
 
@@ -82,15 +82,15 @@ Example log:
 
 ```
 RevGuard/app/src/main/java/com/revguard/
-├── MainActivity.kt    — UI, permissions, BLE scan + bond wizard
-├── BleService.kt      — Foreground service, watchdog logic, battery polling
-├── BleManager.kt      — BLE connection lifecycle, GATT operation queue, auto-reconnect
-├── BondingHelper.kt   — BLE scanning, programmatic device bonding
-├── EventLog.kt        — Thread-safe timestamped logger with file persistence
-└── Constants.kt       — BLE UUIDs, mode bytes, timing constants
+├── MainActivity.kt    # UI, permissions, BLE scan + bond wizard
+├── BleService.kt      # Foreground service, watchdog logic, battery polling
+├── BleManager.kt      # BLE connection lifecycle, GATT operation queue, auto-reconnect
+├── BondingHelper.kt   # BLE scanning, programmatic device bonding
+├── EventLog.kt        # Thread-safe timestamped logger with file persistence
+└── Constants.kt       # BLE UUIDs, mode bytes, timing constants
 ```
 
-**No third-party BLE libraries** — uses raw `android.bluetooth` APIs only.
+**No third-party BLE libraries.** Uses raw `android.bluetooth` APIs only.
 
 ## License
 

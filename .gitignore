@@ -9,6 +9,7 @@ jadx/
 
 # Internal project notes
 project_context.md
+docs/reddit_post_draft.md
 
 # Raw telemetry logs (contain device MAC)
 notify_log_*.txt
