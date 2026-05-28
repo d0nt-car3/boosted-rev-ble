@@ -57,7 +57,7 @@ class BleService : Service() {
     // ── Watchdog Setup ───────────────────────────────────────────────────
 
     private fun setupWatchdog() {
-        // Mode watchdog — auto-revert on any mode change
+        // Mode watchdog: auto-revert on any mode change
         bleManager.addModeListener { modeByte ->
             if (modeByte != Constants.TARGET_MODE_BYTE) {
                 val fromLabel = Constants.modeLabel(modeByte)

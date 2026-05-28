@@ -40,8 +40,8 @@
 | 19 | `LIGHTS_STATUS` | `EA32DCAC-D410-42E2-848A-1218201468FC` | **Yes** | Current light state |
 | 20 | `LIGHTS_BRIGHTNESS` | `EA326B96-D410-42E2-848A-1218201468FC` | No | Brightness level |
 | 21 | `BRAKE_LIGHTS_PATTERN` | `EA324D8C-D410-42E2-848A-1218201468FC` | No | Brake light pattern |
-| 22 | `SERIAL_CMD` 🔑 | `58856524-0065-11E6-8D22-5E5517507C66` | No | **Write** serial commands to ESC |
-| 23 | `SERIAL_AUTH` 🔑 | `58856525-0065-11E6-8D22-5E5517507C66` | **Yes** | Auth challenge/response channel |
+| 22 | `SERIAL_CMD` [AUTH] | `58856524-0065-11E6-8D22-5E5517507C66` | No | **Write** serial commands to ESC |
+| 23 | `SERIAL_AUTH` [AUTH] | `58856525-0065-11E6-8D22-5E5517507C66` | **Yes** | Auth challenge/response channel |
 
 ---
 
@@ -55,7 +55,7 @@ Phone reads SERIAL_AUTH (UUID 58856525)
     → ESC sends 16-byte random challenge
 
 Phone calls: repository.authorizeSerialCommunication(boardId, challengeHex)
-    → HTTP POST to Boosted cloud servers  ← ⛔ SERVERS ARE OFFLINE
+    → HTTP POST to Boosted cloud servers  ← SERVERS ARE OFFLINE
 
 Servers return: signed response string
     → Phone writes response to SERIAL_CMD (UUID 58856524)
@@ -67,10 +67,10 @@ ESC reads SERIAL_AUTH notification
 
 ### Key Finding: No Local Crypto
 The signing key is **NOT in the APK**. The app is a thin client that forwards the challenge to Boosted's backend. There is:
-- ❌ No `Cipher.getInstance()` call in the Boosted package
-- ❌ No `SecretKeySpec` or hardcoded key material  
-- ❌ No local HMAC or AES implementation
-- ✅ A `repository.authorizeSerialCommunication()` network call (dead since 2020)
+- No `Cipher.getInstance()` call in the Boosted package
+- No `SecretKeySpec` or hardcoded key material  
+- No local HMAC or AES implementation
+- A `repository.authorizeSerialCommunication()` network call (dead since 2020)
 
 ### Implication for Our Use Case
 **The handshake does not apply to us.** From `o.java` line 404–410:

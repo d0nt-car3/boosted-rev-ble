@@ -196,7 +196,7 @@ class BleManager(
             if (characteristic.uuid == Constants.CHAR_VEHICLE_MODE) {
                 if (status == BluetoothGatt.GATT_SUCCESS) {
                     eventLog.log("MODE", "Write confirmed: ${Constants.TARGET_MODE_LABEL}")
-                    // Update UI — ESC may not send a NOTIFY for a value we just wrote
+                    // Update UI: ESC may not send a NOTIFY for a value we just wrote
                     lastModeByte = Constants.TARGET_MODE_BYTE
                     modeListeners.forEach { it(Constants.TARGET_MODE_BYTE) }
                 } else {
@@ -228,7 +228,7 @@ class BleManager(
 
     /**
      * Explicitly disconnect from the scooter.
-     * Sets userDisconnected=true to suppress auto-reconnect — the GATT
+     * Sets userDisconnected=true to suppress auto-reconnect. The GATT
      * callback fires asynchronously and would otherwise restart the loop.
      */
     fun disconnect() {
