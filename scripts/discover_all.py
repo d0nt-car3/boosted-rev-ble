@@ -1,5 +1,5 @@
 """
-Boosted Rev — Full GATT Discovery Scanner
+Boosted Rev: Full GATT Discovery Scanner
 ==========================================
 Connects to the Boosted Rev, reads every readable characteristic,
 subscribes to all NOTIFY characteristics, and logs streaming data.
@@ -10,7 +10,7 @@ Requirements:
     pip install -r requirements.txt
     Device must already be bonded to this machine.
     A BLE adapter supporting Central role is required.
-    (Built-in laptop adapters often do NOT support this — use a USB BLE dongle.)
+    (Built-in laptop adapters often do NOT support this; use a USB BLE dongle.)
 
 Usage:
     python scripts/discover_all.py
@@ -55,7 +55,7 @@ async def discover(duration: int):
 
     async with BleakClient(device) as client:
         print("=" * 60)
-        print("STATIC READS — All Readable Characteristics")
+        print("STATIC READS: All Readable Characteristics")
         print("=" * 60)
 
         notify_chars = []
@@ -88,7 +88,7 @@ async def discover(duration: int):
 
         if notify_chars and duration > 0:
             print("\n" + "=" * 60)
-            print(f"NOTIFY STREAM — Logging for {duration} seconds")
+            print(f"NOTIFY STREAM: Logging for {duration} seconds")
             print("=" * 60)
 
             log = []
@@ -112,7 +112,7 @@ async def discover(duration: int):
                     print(f"  Could not subscribe to {char.uuid}: {e}")
 
             print(f"Subscribed to {len(notify_chars)} NOTIFY characteristics.")
-            print("Ride now — logging all notifications...\n")
+            print("Ride now, logging all notifications...\n")
             await asyncio.sleep(duration)
 
             for char in notify_chars:

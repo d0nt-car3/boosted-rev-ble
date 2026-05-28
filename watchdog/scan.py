@@ -1,5 +1,5 @@
 """
-Boosted Rev — BLE Discovery Scanner
+Boosted Rev: BLE Discovery Scanner
 Non-destructive: reads only, no writes.
 """
 import asyncio
@@ -26,6 +26,6 @@ async def scan():
         print(f"\nScooter ({SCOOTER_MAC}) not found in scan.")
         print("Make sure the scooter is powered on and nearby.")
     else:
-        print(f"\nScooter detected ✅")
+        print(f"\nScooter detected [OK]")
 
 asyncio.run(scan())

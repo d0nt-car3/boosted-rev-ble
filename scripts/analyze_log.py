@@ -30,7 +30,7 @@ SPEED_COEFF = 0.00223694  # mph per unit (from APK)
 ODOMETER_COEFF = 3.6128e-5  # miles per unit (from APK)
 
 print("=" * 80)
-print("TELEMETRY ANALYSIS — Boosted Rev Notify Log")
+print("TELEMETRY ANALYSIS: Boosted Rev Notify Log")
 print("=" * 80)
 
 with open(LOG_FILE) as f:
@@ -89,7 +89,7 @@ for line in lines:
 
 # --- SPEED ---
 print(f"\n{'─'*40}")
-print(f"VEHICLE_SPEED (7dc56b34) — {len(speed_values)} samples")
+print(f"VEHICLE_SPEED (7dc56b34): {len(speed_values)} samples")
 print(f"  APK decoder: 2 bytes LE × {SPEED_COEFF}")
 print(f"{'─'*40}")
 if speed_values:
@@ -110,7 +110,7 @@ if speed_values:
 
 # --- ODOMETER ---
 print(f"\n{'─'*40}")
-print(f"VEHICLE_ODOMETER (7dc56594) — {len(odo_values)} samples")
+print(f"VEHICLE_ODOMETER (7dc56594): {len(odo_values)} samples")
 print(f"  APK decoder: 4 bytes LE × {ODOMETER_COEFF}")
 print(f"{'─'*40}")
 if odo_values:
@@ -123,11 +123,11 @@ if odo_values:
     # Check if monotonically increasing
     raw_vals = [v[1] for v in odo_values]
     is_mono = all(raw_vals[i] <= raw_vals[i+1] for i in range(len(raw_vals)-1))
-    print(f"  Monotonically increasing: {'YES ✅' if is_mono else 'NO ⚠️'}")
+    print(f"  Monotonically increasing: {'YES' if is_mono else 'NO'}")
 
 # --- POWER ---
 print(f"\n{'─'*40}")
-print(f"VEHICLE_POWER (7dc56bfc) — {len(power_values)} samples")
+print(f"VEHICLE_POWER (7dc56bfc): {len(power_values)} samples")
 print(f"  Format: 2 bytes LE (signed?)")
 print(f"{'─'*40}")
 if power_values:
@@ -138,7 +138,7 @@ if power_values:
 
 # --- BATTERY ---
 print(f"\n{'─'*40}")
-print(f"BATTERY_REMAINING (65a8eeae) — {len(battery_values)} samples")
+print(f"BATTERY_REMAINING (65a8eeae): {len(battery_values)} samples")
 print(f"{'─'*40}")
 if battery_values:
     for ts, val in battery_values:

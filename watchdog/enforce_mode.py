@@ -1,5 +1,5 @@
 """
-Boosted Rev — Mode Enforcer + Watchdog
+Boosted Rev: Mode Enforcer + Watchdog
 ========================================
 Connects to the Boosted Rev over BLE, sets Mode 2 (18 mph), and
 actively monitors for any mode changes (e.g. physical button presses).
@@ -32,9 +32,9 @@ SCOOTER_ADDRESS    = "XX:XX:XX:XX:XX:XX"  # Replace with your scooter's BLE MAC 
 MODE_CHARACTERISTIC = "7dc55f22-c61f-11e5-9912-ba0be0483c18"
 
 MODE_MAP = {
-    1: (0x00, "Mode 1 — 12 mph"),
-    2: (0x01, "Mode 2 — 18 mph (Utah-legal)"),
-    3: (0x02, "Mode 3 — 24 mph"),
+    1: (0x00, "Mode 1, 12 mph"),
+    2: (0x01, "Mode 2, 18 mph (Utah-legal)"),
+    3: (0x02, "Mode 3, 24 mph"),
 }
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -75,7 +75,7 @@ async def run_watchdog(target_mode: int):
 
     device = await find_scooter()
 
-    # Revert callback — called on every NOTIFY from the scooter
+    # Revert callback: called on every NOTIFY from the scooter
     revert_lock = asyncio.Lock()
 
     async def revert(client: BleakClient):
@@ -95,7 +95,7 @@ async def run_watchdog(target_mode: int):
         if raw[0] != target_byte:
             print(f"WARNING: Write may not have taken. Read back: 0x{raw[0]:02X}")
         else:
-            print(f"✅ Mode set: {target_label}")
+            print(f"[OK] Mode set: {target_label}")
 
         # Subscribe to NOTIFY
         def on_notify(sender, data: bytearray):
@@ -103,7 +103,7 @@ async def run_watchdog(target_mode: int):
             current_mode = byte_to_mode(current_byte)
             if current_byte != target_byte:
                 print(
-                    f"⚠️  Mode change detected: {mode_label(current_mode)} "
+                    f"[WARN] Mode change detected: {mode_label(current_mode)} "
                     f"→ reverting to {target_label}..."
                 )
                 asyncio.ensure_future(revert(client))
@@ -112,7 +112,7 @@ async def run_watchdog(target_mode: int):
         await client.start_notify(MODE_CHARACTERISTIC, on_notify)
 
         print(
-            f"\n🔒 Watchdog active — mode locked to {target_label}\n"
+            f"\n[LOCKED] Watchdog active, mode locked to {target_label}\n"
             f"   Any physical button mode changes will be reverted automatically.\n"
             f"   Press Ctrl+C to stop.\n"
         )

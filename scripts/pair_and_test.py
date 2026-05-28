@@ -1,5 +1,5 @@
 """
-Boosted Rev — BLE Connect + GATT Read Test (bleak 3.x, post-bonding)
+Boosted Rev: BLE Connect + GATT Read Test (bleak 3.x, post-bonding)
 Scooter must already be bonded via bluetoothctl.
 """
 import asyncio
@@ -17,7 +17,7 @@ async def connect_and_read():
         return
 
     print(f"Found: {device.name}")
-    print("Connecting (already bonded — should get full GATT)...")
+    print("Connecting (already bonded, should get full GATT)...")
 
     # address_type random is important for this device
     async with BleakClient(device, timeout=30.0) as client:
@@ -58,6 +58,6 @@ async def connect_and_read():
             print(f"  RIDE MODE: {mode_names.get(mode, f'Unknown ({mode})')}")
             print(f"{'='*50}")
         except Exception as e:
-            print(f"\n⚠️  Could not read ride mode: {e}")
+            print(f"\n[WARN] Could not read ride mode: {e}")
 
 asyncio.run(connect_and_read())
